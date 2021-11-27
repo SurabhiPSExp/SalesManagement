@@ -1,0 +1,44 @@
+CREATE TABLE Login
+(l_id INT IDENTITY(1,1) PRIMARY KEY,
+Username VARCHAR(30),
+Password VARCHAR(30),
+UserTypeId INT,
+CONSTRAINT FK_User FOREIGN KEY (UserTypeId)
+    REFERENCES UserTypes(UserTypeId));
+
+CREATE TABLE Employee
+(emp_id INT IDENTITY(1,1) PRIMARY KEY,
+FirstName VARCHAR(30),
+LastName VARCHAR(30),
+Age INT,
+Gender VARCHAR(30),
+Address VARCHAR(30),
+PhoneNo NUMERIC,
+l_id INT,
+IsActive BIT,
+CONSTRAINT FK_employee FOREIGN KEY (l_id)
+    REFERENCES Login(l_id));
+
+CREATE TABLE VisitTable
+(visit_id INT IDENTITY(1,1) PRIMARY KEY,
+cust_name VARCHAR(100),
+contact_person VARCHAR(100),
+interest_product VARCHAR(100),
+visit_subject VARCHAR(100),
+description VARCHAR(100),
+visit_datetime DATETIME,
+is_disabled BIT,
+is_deleted BIT,
+emp_id INT,
+CONSTRAINT FK_employeeId FOREIGN KEY (emp_id)
+    REFERENCES Employee(emp_id));
+
+
+CREATE TABLE UserTypes
+(
+UserTypeId INT PRIMARY KEY IDENTITY(1,1),
+UserType VARCHAR(15)
+);
+ALTER TABLE VisitTable
+ADD IsActive BIT;
+SELECT * FROM VisitTable;
