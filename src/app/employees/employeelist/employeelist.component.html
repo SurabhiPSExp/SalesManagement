@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="header">
+      <h5>Employee Information</h5>
+      <!--search-->
+      <div class="form-control">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search....."
+          [(ngModel)]="filter"
+        />
+        <!--button also we can use here-->
+        <!--Button-->
+        <a [routerLink]="['employee']" class="btn btn-primary" style="float: right">Refresh</a>
+      </div>
+      <a [routerLink]="['../employee']" class="btn btn-primary">Add Employee</a>
+  
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+  
+            <th>Full Name</th>
+  
+            <th>Designation</th>
+  
+            <th>Date of Joining</th>
+  
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let emp of empService.employees
+                | filter: filter
+                | paginate: { itemsPerPage: 5, currentPage: page }
+            "
+          >
+            <td (click)="populateForm(emp)">{{ emp.EmployeeId }}</td>
+  
+            <td (click)="populateForm(emp)">{{ emp.EmployeeName }}</td>
+  
+            <td (click)="populateForm(emp)">{{ emp.Designation }}</td>
+  
+            <td (click)="populateForm(emp)">{{ emp.DateOfJoining |date:"dd-MM-yyyy"}}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger">X</button>
+              <button
+                (click)="updateEmployee(emp.EmployeeId)"
+                class="btn btn-info"
+                style="margin-left: 10px"
+              >
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="footer">
+        <!--paginatiom control-->
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>

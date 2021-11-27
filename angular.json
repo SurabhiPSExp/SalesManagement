@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "SalesManagement"
+    }
+  },
+  "defaultProject": "SalesManagement",
+  "cli": {
+    "analytics": "654a262d-c223-43e7-83cc-07612a2bbcf3"
+  }
 }
